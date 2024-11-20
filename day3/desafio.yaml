@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-girus
+  name: nginx-girus
+  namespace: giropops
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx-girus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx-girus
+    spec:
+      containers:
+      - image: nginx:1.16.0
+        name: nginx
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: "0.1"
+          limits:
+            memory: 128Mi
+            cpu: "0.3"
